@@ -1,6 +1,7 @@
 import 'package:fuelwise/models/category_model.dart';
 import 'package:fuelwise/models/diet_model.dart';
 import 'package:fuelwise/models/popular_model.dart';
+import 'package:fuelwise/models/station_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,6 +16,8 @@ class HomePage extends StatelessWidget {
     categories = CategoryModel.getCategories();
     diets = DietModel.getDiets();
     popularDiets = PopularDietsModel.getPopularDiets();
+    print(StationModel.testString());
+    print(StationModel.testPostRequest('iste eos nostrum'));
   }
 
   @override
