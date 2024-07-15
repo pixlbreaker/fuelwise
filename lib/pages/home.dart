@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fuelwise/pages/map.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   void _getInitialInfo() {
     // print(StationModel.testString());
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     _getInitialInfo();
     return Scaffold(
       appBar: appBar(context),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: ListView(
         children: [
           const SizedBox(
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
         'Fuel Wise',
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       elevation: 0.0,
       centerTitle: true,
       leading: GestureDetector(

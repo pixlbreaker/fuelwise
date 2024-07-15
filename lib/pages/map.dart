@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fuelwise/service/location_service.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 
@@ -15,6 +18,17 @@ class _MapPage extends State<MapPage> {
   // ignore: unused_field
   int _counter = 0;
 
+  // Gets the location
+  double lat = 51.1;
+  double lng = -2.0;
+  final _LocationService = LocationService();
+
+  _fetchLocation() async {
+    Position position = await _LocationService.getLatLong();
+    lat = position.latitude;
+    lng = position.longitude;
+  }
+
   // ignore: unused_element
   void _incrementCounter() {
     setState(() {
@@ -24,6 +38,7 @@ class _MapPage extends State<MapPage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      _fetchLocation();
     });
   }
 
@@ -31,13 +46,13 @@ class _MapPage extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(widget.title),
       ),
       body: Center(
         child: FlutterMap(
           options: MapOptions(
-            initialCenter: LatLng(51.509364, -0.128928),
+            initialCenter: LatLng(lat, lng),
             initialZoom: 15.1,
           ),
           children: [
