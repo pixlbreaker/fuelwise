@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const MapPage(title: 'Map'),
+                    builder: (context) => const MapScreen(),
                   ),
                 );
               },

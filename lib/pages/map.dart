@@ -1,76 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:fuelwise/service/location_service.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapPage extends StatefulWidget {
-  const MapPage({super.key, required this.title});
-
-  final String title;
+class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
 
   @override
-  State<MapPage> createState() => _MapPage();
+  State<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapPage extends State<MapPage> {
-  // ignore: unused_field
-  int _counter = 0;
+class _MapScreenState extends State<MapScreen> {
+  late GoogleMapController mapController;
 
-  // Gets the location
-  double lat = 51.1;
-  double lng = -2.0;
-  final _LocationService = LocationService();
+  LatLng? _currentPosition;
 
-  _fetchLocation() async {
-    Position position = await _LocationService.getLatLong();
-    lat = position.latitude;
-    lng = position.longitude;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
   }
 
-  // ignore: unused_element
-  void _incrementCounter() {
+  // Gets the Location
+  getLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+
+    LatLng location = LatLng(lat, long);
+
+    // Current Location
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-      _fetchLocation();
+      _currentPosition = location;
+      _isLoading = false;
     });
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        title: Text(widget.title),
+        title: const Text('Map'),
       ),
-      body: Center(
-        child: FlutterMap(
-          options: MapOptions(
-            initialCenter: LatLng(lat, lng),
-            initialZoom: 15.1,
-          ),
-          children: [
-            TileLayer(
-              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              userAgentPackageName: 'com.example.app',
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : GoogleMap(
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: _currentPosition!,
+                zoom: 16.0,
+              ),
             ),
-            RichAttributionWidget(
-              attributions: [
-                TextSourceAttribution('OpenStreetMap contributors',
-                    onTap: () =>
-                        {} //launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-                    ),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
