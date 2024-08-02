@@ -59,7 +59,7 @@ class _MapScreenState extends State<MapScreen> {
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
                 target: _currentPosition!,
-                zoom: 16.0,
+                zoom: 14.0,
               ),
             ),
     );

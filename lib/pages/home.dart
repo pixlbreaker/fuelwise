@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fuelwise/models/test_post_request.dart';
 import 'package:fuelwise/pages/map.dart';
+import 'package:fuelwise/models/station_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   void _getInitialInfo() {
-    // print(StationModel.testString());
-    // print(StationModel.testPostRequest('iste eos nostrum'));
+    PostRequestModel.testPostRequest("quidem molestiae enim");
   }
 
   @override
