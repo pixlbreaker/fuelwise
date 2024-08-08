@@ -3,22 +3,11 @@ import 'dart:convert';
 import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:http/http.dart' as http;
 
-class StationModel {
-  String name;
+class GasBuddyService {
+  GasBuddyService();
 
-  StationModel({required this.name});
-
-  static List<StationModel> getStations() {
-    List<StationModel> stations = [];
-
-    return stations;
-  }
-
-  static String testString() {
-    return "this";
-  }
-
-  static Future<Data> stationPostRequest(String title) async {
+  // Makes the Post Request
+  Future<Data> stationPostRequest(String cityName) async {
     final response = await http.post(
         Uri.parse('https://www.gasbuddy.com/graphql'),
         headers: <String, String>{

@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:fuelwise/models/test_post_request.dart';
 import 'package:fuelwise/pages/map.dart';
 import 'package:fuelwise/models/station_model.dart';
+import 'package:fuelwise/service/gas_buddy_service.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  void _getInitialInfo() {
-    PostRequestModel.testPostRequest("quidem molestiae enim");
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void _getInitialInfo() async {
+    //PostRequestModel.testPostRequest("quidem molestiae enim");
+    //Future<Data> data = StationModel.stationPostRequest('title');
+
+    final _gasBuddyService = GasBuddyService();
+    Data? _data;
+    final data = await _gasBuddyService.stationPostRequest('test');
   }
 
   @override
