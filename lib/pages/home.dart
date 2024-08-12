@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuelwise/models/gas_buddy_model.dart';
-import 'package:fuelwise/models/test_post_request.dart';
 import 'package:fuelwise/pages/map.dart';
-import 'package:fuelwise/models/station_model.dart';
 import 'package:fuelwise/service/gas_buddy_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,16 +10,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? typeName;
+  int? count;
+
   void _getInitialInfo() async {
     //PostRequestModel.testPostRequest("quidem molestiae enim");
     //Future<Data> data = StationModel.stationPostRequest('title');
 
     final _gasBuddyService = GasBuddyService();
-    Data? _data;
     final data = await _gasBuddyService.stationPostRequest('L5r 1k1');
-    int? lat = data.locationBySearchTerm?.stations?.count;
-    typeName = data.locationBySearchTerm?.stations!.typename;
+    count = data.locationBySearchTerm.stations.count;
   }
 
   @override
@@ -36,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 40,
           ),
-          Text(typeName.toString()),
+          Text(count.toString()),
           TextButton(
               onPressed: () {
                 Navigator.push(
