@@ -13,13 +13,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? typeName;
   void _getInitialInfo() async {
     //PostRequestModel.testPostRequest("quidem molestiae enim");
     //Future<Data> data = StationModel.stationPostRequest('title');
 
     final _gasBuddyService = GasBuddyService();
     Data? _data;
-    final data = await _gasBuddyService.stationPostRequest('test');
+    final data = await _gasBuddyService.stationPostRequest('L5r 1k1');
+    int? lat = data.locationBySearchTerm?.stations?.count;
+    typeName = data.locationBySearchTerm?.stations!.typename;
   }
 
   @override
@@ -33,6 +36,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 40,
           ),
+          Text(typeName.toString()),
           TextButton(
               onPressed: () {
                 Navigator.push(
