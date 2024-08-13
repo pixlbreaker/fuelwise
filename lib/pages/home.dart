@@ -10,15 +10,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int? count;
+  final _gasBuddyService = GasBuddyService();
+  int? count = 0;
 
   void _getInitialInfo() async {
-    //PostRequestModel.testPostRequest("quidem molestiae enim");
-    //Future<Data> data = StationModel.stationPostRequest('title');
+    final model = await _gasBuddyService.stationPostRequest('l5r 1k1');
 
-    final _gasBuddyService = GasBuddyService();
-    final data = await _gasBuddyService.stationPostRequest('L5r 1k1');
-    count = data.locationBySearchTerm.stations.count;
+    if (!mounted) return;
+    // Sets the data for the state
+    setState(() {
+      count = model.data?.locationBySearchTerm?.stations?.count;
+    });
+  }
+
+  Future<void> _pullRefresh() async {
+    _getInitialInfo();
+  }
+
+  // init state
+  @override
+  void initState() {
+    super.initState();
+    _getInitialInfo();
   }
 
   @override
@@ -27,23 +40,26 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: appBar(context),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 40,
-          ),
-          Text(count.toString()),
-          TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MapScreen(),
-                  ),
-                );
-              },
-              child: Text('Map'))
-        ],
+      body: RefreshIndicator(
+        onRefresh: _pullRefresh,
+        child: ListView(
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            Text(count.toString()),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MapScreen(),
+                    ),
+                  );
+                },
+                child: Text('Map'))
+          ],
+        ),
       ),
     );
   }

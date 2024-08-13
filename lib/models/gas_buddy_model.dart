@@ -1,209 +1,193 @@
-class Data {
-  Data({
-    required this.locationBySearchTerm,
-  });
-  late final LocationBySearchTerm locationBySearchTerm;
+class GasBuddyModel {
+  Data? data;
 
-  Data.fromJson(Map<String, dynamic> json) {
-    locationBySearchTerm =
-        LocationBySearchTerm.fromJson(json['locationBySearchTerm']);
+  GasBuddyModel({this.data});
+
+  GasBuddyModel.fromJson(Map<String, dynamic> json) {
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['locationBySearchTerm'] = locationBySearchTerm.toJson();
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
+}
+
+class Data {
+  LocationBySearchTerm? locationBySearchTerm;
+
+  Data({this.locationBySearchTerm});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    locationBySearchTerm = json['locationBySearchTerm'] != null
+        ? new LocationBySearchTerm.fromJson(json['locationBySearchTerm'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.locationBySearchTerm != null) {
+      data['locationBySearchTerm'] = this.locationBySearchTerm!.toJson();
+    }
+    return data;
   }
 }
 
 class LocationBySearchTerm {
-  LocationBySearchTerm({
-    required this.stations,
-    required this.trends,
-    required this.typename,
-  });
-  late final Stations stations;
-  late final List<Trends> trends;
-  late final String typename;
+  Stations? stations;
+  String? sTypename;
+
+  LocationBySearchTerm({this.stations, this.sTypename});
 
   LocationBySearchTerm.fromJson(Map<String, dynamic> json) {
-    stations = Stations.fromJson(json['stations']);
-    trends = List.from(json['trends']).map((e) => Trends.fromJson(e)).toList();
-    typename = json['_typename'];
+    stations = json['stations'] != null
+        ? new Stations.fromJson(json['stations'])
+        : null;
+    sTypename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['stations'] = stations.toJson();
-    _data['trends'] = trends.map((e) => e.toJson()).toList();
-    _data['_typename'] = typename;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.stations != null) {
+      data['stations'] = this.stations!.toJson();
+    }
+    data['__typename'] = this.sTypename;
+    return data;
   }
 }
 
 class Stations {
-  Stations({
-    required this.count,
-    required this.cursor,
-    required this.results,
-    required this.typename,
-  });
-  late final int count;
-  late final Cursor cursor;
-  late final List<Results> results;
-  late final String typename;
+  int? count;
+  Cursor? cursor;
+  List<Results>? results;
+  String? sTypename;
+
+  Stations({this.count, this.cursor, this.results, this.sTypename});
 
   Stations.fromJson(Map<String, dynamic> json) {
     count = json['count'];
-    cursor = Cursor.fromJson(json['cursor']);
-    results =
-        List.from(json['results']).map((e) => Results.fromJson(e)).toList();
-    typename = json['_typename'];
+    cursor =
+        json['cursor'] != null ? new Cursor.fromJson(json['cursor']) : null;
+    if (json['results'] != null) {
+      results = <Results>[];
+      json['results'].forEach((v) {
+        results!.add(new Results.fromJson(v));
+      });
+    }
+    sTypename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['count'] = count;
-    _data['cursor'] = cursor.toJson();
-    _data['results'] = results.map((e) => e.toJson()).toList();
-    _data['_typename'] = typename;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['count'] = this.count;
+    if (this.cursor != null) {
+      data['cursor'] = this.cursor!.toJson();
+    }
+    if (this.results != null) {
+      data['results'] = this.results!.map((v) => v.toJson()).toList();
+    }
+    data['__typename'] = this.sTypename;
+    return data;
   }
 }
 
 class Cursor {
-  Cursor({
-    required this.next,
-    required this.typename,
-  });
-  late final String next;
-  late final String typename;
+  String? next;
+  String? sTypename;
+
+  Cursor({this.next, this.sTypename});
 
   Cursor.fromJson(Map<String, dynamic> json) {
     next = json['next'];
-    typename = json['_typename'];
+    sTypename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['next'] = next;
-    _data['_typename'] = typename;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['next'] = this.next;
+    data['__typename'] = this.sTypename;
+    return data;
   }
 }
 
 class Results {
-  Results({
-    required this.fuels,
-    required this.id,
-    required this.name,
-    required this.prices,
-  });
-  late final List<String> fuels;
-  late final String id;
-  late final String name;
-  late final List<Prices> prices;
+  List<String>? fuels;
+  String? id;
+  String? name;
+  List<Prices>? prices;
+
+  Results({this.fuels, this.id, this.name, this.prices});
 
   Results.fromJson(Map<String, dynamic> json) {
-    fuels = List.castFrom<dynamic, String>(json['fuels']);
+    fuels = json['fuels'].cast<String>();
     id = json['id'];
     name = json['name'];
-    prices = List.from(json['prices']).map((e) => Prices.fromJson(e)).toList();
+    if (json['prices'] != null) {
+      prices = <Prices>[];
+      json['prices'].forEach((v) {
+        prices!.add(new Prices.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['fuels'] = fuels;
-    _data['id'] = id;
-    _data['name'] = name;
-    _data['prices'] = prices.map((e) => e.toJson()).toList();
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['fuels'] = this.fuels;
+    data['id'] = this.id;
+    data['name'] = this.name;
+    if (this.prices != null) {
+      data['prices'] = this.prices!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 }
 
 class Prices {
-  Prices({
-    this.cash,
-    required this.credit,
-  });
-  late final Null cash;
-  late final Credit credit;
+  Null? cash;
+  Credit? credit;
+
+  Prices({this.cash, this.credit});
 
   Prices.fromJson(Map<String, dynamic> json) {
-    cash = null;
-    credit = Credit.fromJson(json['credit']);
+    cash = json['cash'];
+    credit =
+        json['credit'] != null ? new Credit.fromJson(json['credit']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['cash'] = cash;
-    _data['credit'] = credit.toJson();
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['cash'] = this.cash;
+    if (this.credit != null) {
+      data['credit'] = this.credit!.toJson();
+    }
+    return data;
   }
 }
 
 class Credit {
-  Credit({
-    this.nickname,
-    this.postedTime,
-    required this.price,
-    required this.typename,
-  });
-  late final String? nickname;
-  late final String? postedTime;
-  late final double? price;
-  late final String typename;
+  String? nickname;
+  String? postedTime;
+  double? price;
+  String? sTypename;
+
+  Credit({this.nickname, this.postedTime, this.price, this.sTypename});
 
   Credit.fromJson(Map<String, dynamic> json) {
-    nickname = null;
-    postedTime = null;
+    nickname = json['nickname'];
+    postedTime = json['postedTime'];
     price = json['price'];
-    typename = json['_typename'];
+    sTypename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['nickname'] = nickname;
-    _data['postedTime'] = postedTime;
-    _data['price'] = price;
-    _data['_typename'] = typename;
-    return _data;
-  }
-}
-
-class Trends {
-  Trends({
-    required this.areaName,
-    required this.country,
-    required this.today,
-    required this.todayLow,
-    required this.trend,
-    required this.typename,
-  });
-  late final String areaName;
-  late final String country;
-  late final double today;
-  late final double? todayLow;
-  late final int trend;
-  late final String typename;
-
-  Trends.fromJson(Map<String, dynamic> json) {
-    areaName = json['areaName'];
-    country = json['country'];
-    today = json['today'];
-    todayLow = json['todayLow'];
-    trend = json['trend'];
-    typename = json['_typename'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['areaName'] = areaName;
-    _data['country'] = country;
-    _data['today'] = today;
-    _data['todayLow'] = todayLow;
-    _data['trend'] = trend;
-    _data['_typename'] = typename;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['nickname'] = this.nickname;
+    data['postedTime'] = this.postedTime;
+    data['price'] = this.price;
+    data['__typename'] = this.sTypename;
+    return data;
   }
 }

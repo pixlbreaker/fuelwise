@@ -24,6 +24,7 @@ class _MapScreenState extends State<MapScreen> {
 
   // Gets the Location
   getLocation() async {
+    // ignore: unused_local_variable
     LocationPermission permission;
     permission = await Geolocator.requestPermission();
 
