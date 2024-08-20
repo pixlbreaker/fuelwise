@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   void _getInitialInfo() async {
     // Gets the Location and the postal code
+    // ignore: unused_local_variable
     LocationPermission permission = await Geolocator.requestPermission();
 
     Position position = await Geolocator.getCurrentPosition(
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     if (!mounted) return;
     // Sets the data for the state
     setState(() {
-      count = model.data?.locationBySearchTerm?.stations?.count;
+      count = model.data.locationBySearchTerm.stations.count;
     });
   }
 
