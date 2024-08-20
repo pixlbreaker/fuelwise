@@ -1,193 +1,190 @@
 class GasBuddyModel {
-  Data? data;
-
-  GasBuddyModel({this.data});
+  GasBuddyModel({
+    required this.data,
+  });
+  late final Data data;
 
   GasBuddyModel.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = Data.fromJson(json['data']);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
+    final _data = <String, dynamic>{};
+    _data['data'] = data.toJson();
+    return _data;
   }
 }
 
 class Data {
-  LocationBySearchTerm? locationBySearchTerm;
-
-  Data({this.locationBySearchTerm});
+  Data({
+    required this.locationBySearchTerm,
+  });
+  late final LocationBySearchTerm locationBySearchTerm;
 
   Data.fromJson(Map<String, dynamic> json) {
-    locationBySearchTerm = json['locationBySearchTerm'] != null
-        ? new LocationBySearchTerm.fromJson(json['locationBySearchTerm'])
-        : null;
+    locationBySearchTerm =
+        LocationBySearchTerm.fromJson(json['locationBySearchTerm']);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.locationBySearchTerm != null) {
-      data['locationBySearchTerm'] = this.locationBySearchTerm!.toJson();
-    }
-    return data;
+    final _data = <String, dynamic>{};
+    _data['locationBySearchTerm'] = locationBySearchTerm.toJson();
+    return _data;
   }
 }
 
 class LocationBySearchTerm {
-  Stations? stations;
-  String? sTypename;
-
-  LocationBySearchTerm({this.stations, this.sTypename});
+  LocationBySearchTerm({
+    required this.stations,
+    required this.typename,
+  });
+  late final Stations stations;
+  late final String typename;
 
   LocationBySearchTerm.fromJson(Map<String, dynamic> json) {
-    stations = json['stations'] != null
-        ? new Stations.fromJson(json['stations'])
-        : null;
-    sTypename = json['__typename'];
+    stations = Stations.fromJson(json['stations']);
+    typename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.stations != null) {
-      data['stations'] = this.stations!.toJson();
-    }
-    data['__typename'] = this.sTypename;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['stations'] = stations.toJson();
+    _data['__typename'] = typename;
+    return _data;
   }
 }
 
 class Stations {
-  int? count;
-  Cursor? cursor;
-  List<Results>? results;
-  String? sTypename;
-
-  Stations({this.count, this.cursor, this.results, this.sTypename});
+  Stations({
+    required this.count,
+    required this.cursor,
+    required this.results,
+    required this.typename,
+  });
+  late final int count;
+  late final Cursor cursor;
+  late final List<Results> results;
+  late final String typename;
 
   Stations.fromJson(Map<String, dynamic> json) {
     count = json['count'];
-    cursor =
-        json['cursor'] != null ? new Cursor.fromJson(json['cursor']) : null;
-    if (json['results'] != null) {
-      results = <Results>[];
-      json['results'].forEach((v) {
-        results!.add(new Results.fromJson(v));
-      });
-    }
-    sTypename = json['__typename'];
+    cursor = Cursor.fromJson(json['cursor']);
+    results =
+        List.from(json['results']).map((e) => Results.fromJson(e)).toList();
+    typename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    if (this.cursor != null) {
-      data['cursor'] = this.cursor!.toJson();
-    }
-    if (this.results != null) {
-      data['results'] = this.results!.map((v) => v.toJson()).toList();
-    }
-    data['__typename'] = this.sTypename;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['count'] = count;
+    _data['cursor'] = cursor.toJson();
+    _data['results'] = results.map((e) => e.toJson()).toList();
+    _data['__typename'] = typename;
+    return _data;
   }
 }
 
 class Cursor {
-  String? next;
-  String? sTypename;
-
-  Cursor({this.next, this.sTypename});
+  Cursor({
+    required this.next,
+    required this.typename,
+  });
+  late final String next;
+  late final String typename;
 
   Cursor.fromJson(Map<String, dynamic> json) {
     next = json['next'];
-    sTypename = json['__typename'];
+    typename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['next'] = this.next;
-    data['__typename'] = this.sTypename;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['next'] = next;
+    _data['__typename'] = typename;
+    return _data;
   }
 }
 
 class Results {
-  List<String>? fuels;
-  String? id;
-  String? name;
-  List<Prices>? prices;
-
-  Results({this.fuels, this.id, this.name, this.prices});
+  Results({
+    required this.fuels,
+    required this.id,
+    required this.name,
+    required this.prices,
+  });
+  late final List<String> fuels;
+  late final String id;
+  late final String name;
+  late final List<Prices> prices;
 
   Results.fromJson(Map<String, dynamic> json) {
-    fuels = json['fuels'].cast<String>();
+    fuels = List.castFrom<dynamic, String>(json['fuels']);
     id = json['id'];
     name = json['name'];
-    if (json['prices'] != null) {
-      prices = <Prices>[];
-      json['prices'].forEach((v) {
-        prices!.add(new Prices.fromJson(v));
-      });
-    }
+    prices = List.from(json['prices']).map((e) => Prices.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['fuels'] = this.fuels;
-    data['id'] = this.id;
-    data['name'] = this.name;
-    if (this.prices != null) {
-      data['prices'] = this.prices!.map((v) => v.toJson()).toList();
-    }
-    return data;
+    final _data = <String, dynamic>{};
+    _data['fuels'] = fuels;
+    _data['id'] = id;
+    _data['name'] = name;
+    _data['prices'] = prices.map((e) => e.toJson()).toList();
+    return _data;
   }
 }
 
 class Prices {
-  Null? cash;
-  Credit? credit;
-
-  Prices({this.cash, this.credit});
+  Prices({
+    this.cash,
+    required this.credit,
+  });
+  late final Null cash;
+  late final Credit credit;
 
   Prices.fromJson(Map<String, dynamic> json) {
-    cash = json['cash'];
-    credit =
-        json['credit'] != null ? new Credit.fromJson(json['credit']) : null;
+    cash = null;
+    credit = Credit.fromJson(json['credit']);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['cash'] = this.cash;
-    if (this.credit != null) {
-      data['credit'] = this.credit!.toJson();
-    }
-    return data;
+    final _data = <String, dynamic>{};
+    _data['cash'] = cash;
+    _data['credit'] = credit.toJson();
+    return _data;
   }
 }
 
 class Credit {
-  String? nickname;
-  String? postedTime;
-  double? price;
-  String? sTypename;
-
-  Credit({this.nickname, this.postedTime, this.price, this.sTypename});
+  Credit({
+    this.nickname,
+    this.postedTime,
+    required this.price,
+    required this.typename,
+  });
+  late final String? nickname;
+  late final String? postedTime;
+  late final double? price;
+  late final String typename;
 
   Credit.fromJson(Map<String, dynamic> json) {
-    nickname = json['nickname'];
-    postedTime = json['postedTime'];
-    price = json['price'];
-    sTypename = json['__typename'];
+    nickname = null;
+    postedTime = null;
+    var p = json["price"];
+    if (p == 0) {
+      price = 0.0;
+    } else {
+      price = json['price'];
+    }
+    typename = json['__typename'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['nickname'] = this.nickname;
-    data['postedTime'] = this.postedTime;
-    data['price'] = this.price;
-    data['__typename'] = this.sTypename;
-    return data;
+    final _data = <String, dynamic>{};
+    _data['nickname'] = nickname;
+    _data['postedTime'] = postedTime;
+    _data['price'] = price;
+    _data['__typename'] = typename;
+    return _data;
   }
 }

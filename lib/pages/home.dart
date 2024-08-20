@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fuelwise/pages/map.dart';
 import 'package:fuelwise/service/gas_buddy_service.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,10 +13,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _gasBuddyService = GasBuddyService();
+  final _controller = TextEditingController();
   int? count = 0;
+  String postalCode = "";
 
   void _getInitialInfo() async {
-    final model = await _gasBuddyService.stationPostRequest('l5r 1k1');
+    // Gets the Location and the postal code
+    LocationPermission permission = await Geolocator.requestPermission();
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+
+    // Sets the postalcode
+    postalCode = placemarks[0].postalCode.toString();
+
+    // Makes the post request
+    final model = await _gasBuddyService.stationPostRequest(postalCode);
 
     if (!mounted) return;
     // Sets the data for the state
@@ -23,6 +39,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // Refresh when pulling down
   Future<void> _pullRefresh() async {
     _getInitialInfo();
   }
@@ -47,6 +64,11 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 40,
             ),
+            TextField(
+              controller: _controller,
+              decoration: const InputDecoration(hintText: 'Enter Title'),
+            ),
+            Text(postalCode),
             Text(count.toString()),
             TextButton(
                 onPressed: () {
