@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
     // Sets the data for the state
     setState(() {
       count = model.data.locationBySearchTerm.stations.count;
+      if (count! > 20) count = 20;
       stations = model.data.locationBySearchTerm.stations.results;
     });
   }
