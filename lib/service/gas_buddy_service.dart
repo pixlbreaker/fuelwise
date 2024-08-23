@@ -13,7 +13,7 @@ class GasBuddyService {
       "operationName": "LocationBySearchTerm",
       "variables": {"fuel": 1, "maxAge": 0, "search": searchTerm},
       "query":
-          "query LocationBySearchTerm(\$brandId: Int, \$cursor: String, \$search: String) { locationBySearchTerm(search: \$search) { stations(brandId: \$brandId, cursor: \$cursor) { count cursor { next __typename } results { fuels id name prices { cash { nickname postedTime price __typename } credit { nickname postedTime price __typename } } } __typename } __typename }}"
+          "query LocationBySearchTerm(\$brandId: Int, \$cursor: String, \$search: String) { locationBySearchTerm(search: \$search) { stations(brandId: \$brandId, cursor: \$cursor) { count cursor { next __typename } results { address {  country  line1  line2  locality  postalCode  region  __typename} fuels id name prices { cash { nickname postedTime price __typename } credit { nickname postedTime price __typename } } } __typename } __typename }}"
     });
 
     // Makes the post Request

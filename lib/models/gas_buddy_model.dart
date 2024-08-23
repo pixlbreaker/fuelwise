@@ -107,17 +107,31 @@ class Cursor {
 
 class Results {
   Results({
+    required this.address,
     required this.fuels,
     required this.id,
     required this.name,
     required this.prices,
   });
+  late final Address address;
   late final List<String> fuels;
   late final String id;
   late final String name;
   late final List<Prices> prices;
 
   Results.fromJson(Map<String, dynamic> json) {
+    try {
+      address = Address.fromJson(json['address']);
+    } on Exception catch (_) {
+      address = Address(
+          country: "",
+          line1: "",
+          line2: "",
+          locality: "",
+          postalCode: "",
+          region: "",
+          typename: "");
+    }
     fuels = List.castFrom<dynamic, String>(json['fuels']);
     id = json['id'];
     name = json['name'];
@@ -126,10 +140,52 @@ class Results {
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
+    _data['address'] = address.toJson();
     _data['fuels'] = fuels;
     _data['id'] = id;
     _data['name'] = name;
     _data['prices'] = prices.map((e) => e.toJson()).toList();
+    return _data;
+  }
+}
+
+class Address {
+  Address({
+    required this.country,
+    required this.line1,
+    required this.line2,
+    required this.locality,
+    required this.postalCode,
+    required this.region,
+    required this.typename,
+  });
+  late final String country;
+  late final String line1;
+  late final String line2;
+  late final String locality;
+  late final String postalCode;
+  late final String region;
+  late final String typename;
+
+  Address.fromJson(Map<String, dynamic> json) {
+    country = json['country'];
+    line1 = json['line1'];
+    line2 = json['line2'];
+    locality = json['locality'];
+    postalCode = json['postalCode'];
+    region = json['region'];
+    typename = json['__typename'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['country'] = country;
+    _data['line1'] = line1;
+    _data['line2'] = line2;
+    _data['locality'] = locality;
+    _data['postalCode'] = postalCode;
+    _data['region'] = region;
+    _data['__typename'] = typename;
     return _data;
   }
 }
