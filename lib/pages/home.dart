@@ -19,21 +19,25 @@ class _HomePageState extends State<HomePage> {
   String postalCode = "";
   late List<Results> stations;
 
-  void _getInitialInfo() async {
+  void _getInitialInfo(String search) async {
     if (!mounted) return;
 
-    // Gets the Location and the postal code
-    // ignore: unused_local_variable
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
+    if (search == "") {
+      // Gets the Location and the postal code
+      // ignore: unused_local_variable
+      LocationPermission permission;
+      permission = await Geolocator.requestPermission();
 
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
 
-    // Sets the postalcode
-    postalCode = placemarks[0].postalCode.toString();
+      // Sets the postalcode
+      postalCode = placemarks[0].postalCode.toString();
+    } else {
+      postalCode = search;
+    }
 
     // Makes the post request
     final model = await _gasBuddyService.stationPostRequest(postalCode);
@@ -47,14 +51,14 @@ class _HomePageState extends State<HomePage> {
 
   // Refresh when pulling down
   Future<void> _pullRefresh() async {
-    _getInitialInfo();
+    _getInitialInfo("");
   }
 
   // init state
   @override
   void initState() {
     super.initState();
-    _getInitialInfo();
+    _getInitialInfo("");
   }
 
   @override
@@ -71,11 +75,11 @@ class _HomePageState extends State<HomePage> {
             ),
             TextField(
               controller: _controller,
-              decoration: const InputDecoration(hintText: 'Enter Title'),
+              decoration: const InputDecoration(hintText: 'Enter Postal Code'),
             ),
             ElevatedButton(
                 onPressed: () {
-                  print('This');
+                  _getInitialInfo(_controller.text);
                 },
                 child: Text("Search")),
             Text(postalCode),
