@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fuelwise/pages/map.dart';
-import 'package:fuelwise/pages/profile_page.dart';
 import 'package:fuelwise/service/gas_buddy_service.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
+import 'package:fuelwise/widgets/search.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -75,17 +75,26 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 40,
             ),
-            TextField(
-              controller: _controller,
-              decoration: const InputDecoration(hintText: 'Enter Postal Code'),
+            // TextField(
+            //   controller: _controller,
+            //   decoration: const InputDecoration(hintText: 'Enter Postal Code'),
+            // ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: SearchInput(
+                    textController: _controller,
+                    hintText: "Search",
+                  ),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      _getInitialInfo(_controller.text);
+                    },
+                    child: Text("Search")),
+              ],
             ),
-            ElevatedButton(
-                onPressed: () {
-                  _getInitialInfo(_controller.text);
-                },
-                child: Text("Search")),
-            Text(postalCode),
-            Text(count.toString()),
+            const SizedBox(height: 40),
             TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -96,16 +105,6 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: Text('Map')),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfilePage1(),
-                    ),
-                  );
-                },
-                child: Text('Profile')),
             stationsView(),
             const SizedBox(height: 40),
           ],

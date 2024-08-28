@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fuelwise/theme/theme.dart';
 
 class ThemeProvider with ChangeNotifier {
-  ThemeData _themeData = darkMode;
+  ThemeData _themeData = ThemeData.dark();
 
   ThemeData get themeData => _themeData;
 
@@ -12,10 +12,10 @@ class ThemeProvider with ChangeNotifier {
   }
 
   void toggleTheme() {
-    if (_themeData == lightMode) {
-      themeData = darkMode;
+    if (_themeData == ThemeData.light()) {
+      themeData = ThemeData.dark();
     } else {
-      themeData = lightMode;
+      themeData = ThemeData.dark();
     }
   }
 }
