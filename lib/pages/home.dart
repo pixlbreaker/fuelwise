@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuelwise/pages/map.dart';
+import 'package:fuelwise/pages/profile_page.dart';
 import 'package:fuelwise/service/gas_buddy_service.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:geocoding/geocoding.dart';
@@ -95,6 +96,16 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: Text('Map')),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfilePage1(),
+                    ),
+                  );
+                },
+                child: Text('Profile')),
             stationsView(),
             const SizedBox(height: 40),
           ],
