@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fuelwise/pages/map.dart';
 import 'package:fuelwise/service/gas_buddy_service.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
+import 'package:fuelwise/widgets/nofitication_bell.dart';
 import 'package:fuelwise/widgets/search.dart';
+import 'package:fuelwise/widgets/station_card.dart';
+import 'package:fuelwise/widgets/top_information.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -18,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   final _controller = TextEditingController();
   int? count = 0;
   String postalCode = "";
+  double? topPrice = 0;
   late List<Results> stations;
 
   void _getInitialInfo(String search) async {
@@ -48,6 +52,10 @@ class _HomePageState extends State<HomePage> {
       count = model.data.locationBySearchTerm.stations.count;
       if (count! > 20) count = 20;
       stations = model.data.locationBySearchTerm.stations.results;
+
+      // Gets the top Price
+      topPrice = stations[0].prices[0].credit.price! / 100;
+      topPrice = double.parse(topPrice!.toStringAsFixed(2));
     });
   }
 
@@ -73,12 +81,9 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: [
             const SizedBox(
-              height: 40,
+              height: 25,
             ),
-            // TextField(
-            //   controller: _controller,
-            //   decoration: const InputDecoration(hintText: 'Enter Postal Code'),
-            // ),
+            TopInformation(topPrice!),
             Row(
               children: <Widget>[
                 Expanded(
@@ -94,7 +99,12 @@ class _HomePageState extends State<HomePage> {
                     child: Text("Search")),
               ],
             ),
-            const SizedBox(height: 40),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Divider(
+                color: Color.fromRGBO(97, 99, 119, 1),
+              ),
+            ),
             TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -116,21 +126,29 @@ class _HomePageState extends State<HomePage> {
   Container stationsView() => Container(
         child: ListView.separated(
           itemBuilder: (context, index) {
-            return Container(
-                width: 100,
-                height: 60,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(stations[index].name),
-                      Text(stations[index].prices[0].credit.price.toString()),
-                      Text(stations[index].address.line1)
-                    ]));
+            return StationCard(stations[index]);
+            // return Container(
+            //     width: 100,
+            //     height: 60,
+            //     child: Column(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           Text(stations[index].name),
+            //           Text(stations[index].prices[0].credit.price.toString()),
+            //           Text(stations[index].address.line1)
+            //         ]),
+            //     decoration: BoxDecoration(
+            //       borderRadius: const BorderRadius.all(
+            //         Radius.circular(8.0),
+            //       ),
+            //       color: Theme.of(context).colorScheme.onSurfaceVariant,
+            //     ));
           },
-          separatorBuilder: (context, index) => const SizedBox(
-            width: 25,
-            height: 25,
-          ),
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 15.0,
+            );
+          },
           itemCount: count!.toInt(),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
@@ -141,39 +159,13 @@ class _HomePageState extends State<HomePage> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      title: const Text(
-        'Fuel Wise',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      leading: Icon(
+        Icons.menu,
       ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      elevation: 0.0,
       centerTitle: true,
-      leading: GestureDetector(
-        onTap: () {},
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          alignment: Alignment.center,
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back, size: 28),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-      ),
+      title: Text("Fuel Wise"),
       actions: [
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            alignment: Alignment.center,
-            width: 37,
-            child: IconButton(
-              icon: const Icon(Icons.light_mode, size: 28),
-              onPressed: () {},
-            ),
-          ),
-        ),
+        NotificationBell(),
       ],
     );
   }
