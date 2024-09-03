@@ -7,23 +7,21 @@ class StationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return Slidable(
-      actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
+    return Container(
       child: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (BuildContext context) {
-                //return ResultDetail(station: this.station);
+                return Container();
               },
             ),
           );
         },
         child: Container(
           height: 90,
-          color: Color.fromRGBO(55, 66, 92, 0.4),
+          color: themeData.cardTheme.shadowColor,
           padding: EdgeInsets.symmetric(
             horizontal: 16.0,
           ),
@@ -32,7 +30,7 @@ class StationCard extends StatelessWidget {
               Container(
                 width: 40.0,
                 child: Image.asset(
-                  station.getImagePath(),
+                  "assets/images/subaru.jpg",
                 ),
               ),
               SizedBox(
@@ -43,16 +41,14 @@ class StationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${station.toString()} (${station.name})",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                    "${station.name}",
+                    style: themeData.textTheme.bodyLarge,
                   ),
                   SizedBox(
                     height: 5.0,
                   ),
                   Text(
-                    "${station.prices[0]}",
+                    "${station.address.line1}",
                     style: themeData.textTheme.bodySmall,
                   ),
                 ],
@@ -63,35 +59,14 @@ class StationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "\$${station.prices[0]}",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                    "\$${station.prices[0].credit.price}",
+                    style: themeData.textTheme.bodySmall,
                   ),
                   SizedBox(
                     height: 5.0,
                   ),
                   Row(
-                    children: [
-                      Text(
-                        getResultProgress(station),
-                        style: TextStyle(
-                          color: station.trend == Trend.UP
-                              ? kSuccessColor
-                              : kDangerColor,
-                          fontSize: 13.0,
-                        ),
-                      ),
-                      Icon(
-                        station.trend == Trend.UP
-                            ? FlutterIcons.caret_up_faw
-                            : FlutterIcons.caret_down_faw,
-                        size: 14.0,
-                        color: station.trend == Trend.UP
-                            ? kSuccessColor
-                            : kDangerColor,
-                      )
-                    ],
+                    children: const [Icon(Icons.gas_meter)],
                   ),
                 ],
               )
@@ -99,36 +74,6 @@ class StationCard extends StatelessWidget {
           ),
         ),
       ),
-      actions: <Widget>[
-        IconSlideAction(
-          color: kDangerColor,
-          icon: FlutterIcons.x_fea,
-          foregroundColor: Colors.white,
-          onTap: () => null,
-        ),
-      ],
-      secondaryActions: <Widget>[
-        IconSlideAction(
-          color: kSuccessColor,
-          icon: FlutterIcons.plus_fea,
-          foregroundColor: Colors.white,
-          onTap: () => null,
-        ),
-      ],
     );
   }
-}
-
-String getResultProgress(Result station) {
-  String returnValue = "";
-
-  if (station.trend == Trend.UP) {
-    returnValue += "+";
-  } else {
-    returnValue += "-";
-  }
-
-  returnValue += "\$${station.amountProgress} (${station.percentProgress}%)";
-
-  return returnValue;
 }

@@ -15,7 +15,7 @@ class TopInformation extends StatelessWidget {
         children: [
           Text(
             "Current Price",
-            style: themeData.textTheme.bodySmall,
+            style: themeData.textTheme.bodyLarge,
           ),
           SizedBox(
             height: 6.0,
@@ -26,7 +26,7 @@ class TopInformation extends StatelessWidget {
               Text(
                 "\$" + topPrice.toString(),
                 style: TextStyle(
-                  color: Colors.white,
+                  color: themeData.cardTheme.color,
                   fontSize: 26.0,
                 ),
               ),
@@ -61,13 +61,13 @@ class TopInformation extends StatelessWidget {
               Text(
                 "+2.14%",
                 style: TextStyle(
-                  color: themeData.secondaryHeaderColor,
+                  color: themeData.primaryColor,
                   fontSize: 16.0,
                 ),
               ),
               Icon(
                 Icons.upload_rounded,
-                color: themeData.primaryColor,
+                color: themeData.primaryIconTheme.color,
               )
             ],
           )

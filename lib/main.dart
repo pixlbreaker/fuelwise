@@ -1,27 +1,28 @@
-import 'package:fuelwise/pages/home.dart';
 import 'package:flutter/material.dart';
-import 'package:fuelwise/theme/theme_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:fuelwise/pages/home.dart';
+import 'package:json_theme_plus/json_theme_plus.dart';
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: MyApp(),
-    ),
-  );
+import 'package:flutter/services.dart'; // For rootBundle
+import 'dart:convert'; // For jsonDecode
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final themeStr = await rootBundle.loadString('assets/appainter_theme.json');
+  final themeJson = jsonDecode(themeStr);
+  final theme = ThemeDecoder.decodeThemeData(themeJson)!;
+
+  runApp(MyApp(theme: theme));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeData theme;
+
+  const MyApp({Key? key, required this.theme}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: Provider.of<ThemeProvider>(context).themeData,
-      home: HomePage(),
-    );
+    return MaterialApp(home: HomePage(), theme: theme);
   }
 }

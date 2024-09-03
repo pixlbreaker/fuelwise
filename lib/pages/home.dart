@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                child: Text('Map')),
+                child: const Text('Map')),
             stationsView(),
             const SizedBox(height: 40),
           ],
@@ -127,25 +127,9 @@ class _HomePageState extends State<HomePage> {
         child: ListView.separated(
           itemBuilder: (context, index) {
             return StationCard(stations[index]);
-            // return Container(
-            //     width: 100,
-            //     height: 60,
-            //     child: Column(
-            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //         children: [
-            //           Text(stations[index].name),
-            //           Text(stations[index].prices[0].credit.price.toString()),
-            //           Text(stations[index].address.line1)
-            //         ]),
-            //     decoration: BoxDecoration(
-            //       borderRadius: const BorderRadius.all(
-            //         Radius.circular(8.0),
-            //       ),
-            //       color: Theme.of(context).colorScheme.onSurfaceVariant,
-            //     ));
           },
           separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(
+            return const SizedBox(
               height: 15.0,
             );
           },
@@ -159,11 +143,11 @@ class _HomePageState extends State<HomePage> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      leading: Icon(
+      leading: const Icon(
         Icons.menu,
       ),
       centerTitle: true,
-      title: Text("Fuel Wise"),
+      title: const Text("Fuel Wise"),
       actions: [
         NotificationBell(),
       ],
