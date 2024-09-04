@@ -23,12 +23,9 @@ class SearchInput extends StatelessWidget {
           //Do something wi
         },
         decoration: InputDecoration(
-          prefixIcon: const Icon(
-            Icons.search,
-            color: Color(0xff4338CA),
-          ),
+          prefixIcon: const Icon(Icons.search),
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Theme.of(context).cardColor,
           hintText: hintText,
           hintStyle: const TextStyle(color: Colors.grey),
           contentPadding:

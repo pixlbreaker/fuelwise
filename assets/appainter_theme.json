@@ -1,7 +1,4 @@
 {
-  "appBarTheme": {
-    "backgroundColor": "#ff6750a4"
-  },
   "applyElevationOverlayColor": false,
   "brightness": "dark",
   "buttonTheme": {
@@ -124,6 +121,9 @@
   "highlightColor": "#40cccccc",
   "hintColor": "#99ffffff",
   "hoverColor": "#0affffff",
+  "iconTheme": {
+    "color": "#ffffffff"
+  },
   "indicatorColor": "#ffe6e0e9",
   "inputDecorationTheme": {
     "alignLabelWithHint": false,
@@ -255,8 +255,9 @@
   "splashFactory": "ripple",
   "textTheme": {
     "bodyLarge": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -268,8 +269,9 @@
       "textBaseline": "alphabetic"
     },
     "bodyMedium": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -281,8 +283,9 @@
       "textBaseline": "alphabetic"
     },
     "bodySmall": {
-      "color": "#b3ffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -294,8 +297,9 @@
       "textBaseline": "alphabetic"
     },
     "displayLarge": {
-      "color": "#b3ffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_300",
       "fontFamilyFallback": [
         "Roboto"
@@ -307,8 +311,9 @@
       "textBaseline": "alphabetic"
     },
     "displayMedium": {
-      "color": "#b3ffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_300",
       "fontFamilyFallback": [
         "Roboto"
@@ -320,8 +325,9 @@
       "textBaseline": "alphabetic"
     },
     "displaySmall": {
-      "color": "#b3ffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -333,8 +339,9 @@
       "textBaseline": "alphabetic"
     },
     "headlineLarge": {
-      "color": "#b3ffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -346,8 +353,9 @@
       "textBaseline": "alphabetic"
     },
     "headlineMedium": {
-      "color": "#b3ffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -359,8 +367,9 @@
       "textBaseline": "alphabetic"
     },
     "headlineSmall": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -372,8 +381,9 @@
       "textBaseline": "alphabetic"
     },
     "labelLarge": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_500",
       "fontFamilyFallback": [
         "Roboto"
@@ -385,8 +395,9 @@
       "textBaseline": "alphabetic"
     },
     "labelMedium": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -398,8 +409,9 @@
       "textBaseline": "alphabetic"
     },
     "labelSmall": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -411,8 +423,9 @@
       "textBaseline": "alphabetic"
     },
     "titleLarge": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_500",
       "fontFamilyFallback": [
         "Roboto"
@@ -424,8 +437,9 @@
       "textBaseline": "alphabetic"
     },
     "titleMedium": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_regular",
       "fontFamilyFallback": [
         "Roboto"
@@ -437,8 +451,9 @@
       "textBaseline": "alphabetic"
     },
     "titleSmall": {
-      "color": "#ffffffff",
+      "color": "#ffe6e0e9",
       "decoration": "none",
+      "decorationColor": "#ffe6e0e9",
       "fontFamily": "Roboto_500",
       "fontFamilyFallback": [
         "Roboto"

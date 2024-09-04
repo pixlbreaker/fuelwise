@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).primaryColor,
       body: RefreshIndicator(
         onRefresh: _pullRefresh,
         child: ListView(
@@ -91,11 +91,13 @@ class _HomePageState extends State<HomePage> {
                     hintText: "Search",
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      _getInitialInfo(_controller.text);
-                    },
-                    child: Text("Search")),
+                FilledButton(
+                  onPressed: () {
+                    _getInitialInfo(_controller.text);
+                  },
+                  child: Text("Search"),
+                  style: Theme.of(context).elevatedButtonTheme.style,
+                ),
               ],
             ),
             const Padding(

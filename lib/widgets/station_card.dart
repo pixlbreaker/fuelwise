@@ -59,7 +59,7 @@ class StationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "\$${station.prices[0].credit.price}",
+                    "\$${station.prices[0].credit.price ?? 0}",
                     style: themeData.textTheme.bodySmall,
                   ),
                   SizedBox(
