@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fuelwise/pages/map.dart';
 import 'package:fuelwise/service/gas_buddy_service.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:fuelwise/widgets/nofitication_bell.dart';
@@ -105,16 +104,6 @@ class _HomePageState extends State<HomePage> {
                 color: Color.fromRGBO(97, 99, 119, 1),
               ),
             ),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MapScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Map')),
             stationsView(),
             const SizedBox(height: 40),
           ],

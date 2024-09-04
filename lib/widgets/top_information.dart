@@ -15,7 +15,7 @@ class TopInformation extends StatelessWidget {
         children: [
           Text(
             "Current Price",
-            style: themeData.textTheme.bodyLarge,
+            style: themeData.textTheme.displaySmall,
           ),
           SizedBox(
             height: 6.0,
@@ -30,27 +30,7 @@ class TopInformation extends StatelessWidget {
                   fontSize: 26.0,
                 ),
               ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 8.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(55, 66, 92, 0.78),
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "+ Location",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              ElevatedButton(onPressed: () {}, child: Text("Location")),
             ],
           ),
           SizedBox(
