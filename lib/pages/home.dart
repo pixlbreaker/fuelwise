@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   String postalCode = "";
   double? topPrice = 0;
   late List<Results> stations;
+  int currentPageIndex = 0;
 
   void _getInitialInfo(String search) async {
     if (!mounted) return;
@@ -74,7 +75,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).navigationBarTheme.backgroundColor,
+      bottomNavigationBar: bottomNavigationBar(context),
       body: RefreshIndicator(
         onRefresh: _pullRefresh,
         child: ListView(
@@ -111,6 +113,36 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  NavigationBar bottomNavigationBar(BuildContext context) {
+    return NavigationBar(
+      onDestinationSelected: (int index) {
+        setState(() {
+          currentPageIndex = index;
+        });
+      },
+      indicatorColor: Theme.of(context).navigationBarTheme.indicatorColor,
+      selectedIndex: currentPageIndex,
+      destinations: const <Widget>[
+        NavigationDestination(
+          selectedIcon: Icon(Icons.home),
+          icon: Icon(Icons.home_outlined),
+          label: 'Home',
+        ),
+        NavigationDestination(
+          icon: Badge(child: Icon(Icons.search_outlined)),
+          label: 'Search',
+        ),
+        NavigationDestination(
+          icon: Badge(
+            label: Text('2'),
+            child: Icon(Icons.pin_drop_rounded),
+          ),
+          label: 'Saved Locations',
+        ),
+      ],
     );
   }
 

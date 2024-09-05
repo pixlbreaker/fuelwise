@@ -8,6 +8,9 @@ class StationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
     return Container(
+      decoration: BoxDecoration(
+          color: themeData.primaryColorDark,
+          borderRadius: BorderRadius.circular(20)),
       child: GestureDetector(
         onTap: () {
           Navigator.push(
