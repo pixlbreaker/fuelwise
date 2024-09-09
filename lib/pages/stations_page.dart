@@ -1,44 +1,77 @@
-// import 'package:flutter/material.dart';
-// import 'package:fuelwise/models/gas_buddy_model.dart';
+import 'package:flutter/material.dart';
+import 'package:fuelwise/models/gas_buddy_model.dart';
+import 'package:fuelwise/widgets/nofitication_bell.dart';
 
-// class StationListPage extends StatelessWidget {
-//   final GasBuddyModel gasBuddyModel;
+class StationPage extends StatelessWidget {
+  final Results station;
+  int currentPageIndex = 0;
 
-//   StationListPage({required this.gasBuddyModel});
+  StationPage({super.key, required this.station});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Stations'),
-//       ),
-//       body: ListView.builder(
-//         itemCount: gasBuddyModel.data.locationBySearchTerm.stations.count,
-//         itemBuilder: (context, index) {
-//           final station =
-//               gasBuddyModel.data.locationBySearchTerm.stations[index];
-//           return Card(
-//             child: Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Text(station.name,
-//                       style:
-//                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-//                   SizedBox(height: 5),
-//                   Text("Fuels: ${station.fuels.join(', ')}"),
-//                   SizedBox(height: 5),
-//                   ...station.prices.map((price) => Text(
-//                         "${price.nickname} - \$${price.price} (Posted: ${price.postedTime})",
-//                         style: TextStyle(fontSize: 16),
-//                       )),
-//                 ],
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
+    return Scaffold(
+      appBar: appBar(context),
+      backgroundColor: Theme.of(context).navigationBarTheme.backgroundColor,
+      bottomNavigationBar: bottomNavigationBar(context),
+      body: Column(
+        children: [
+          Text(
+            station.name,
+            style: themeData.textTheme.displaySmall,
+          ),
+          Text(
+            station.address.line1,
+            style: themeData.textTheme.labelSmall,
+          )
+        ],
+      ),
+    );
+  }
+
+  NavigationBar bottomNavigationBar(BuildContext context) {
+    return NavigationBar(
+      onDestinationSelected: (int index) {
+        setState(() {
+          currentPageIndex = index;
+        });
+      },
+      indicatorColor: Theme.of(context).navigationBarTheme.indicatorColor,
+      selectedIndex: currentPageIndex,
+      destinations: const <Widget>[
+        NavigationDestination(
+          selectedIcon: Icon(Icons.home),
+          icon: Icon(Icons.home_outlined),
+          label: 'Home',
+        ),
+        NavigationDestination(
+          icon: Badge(child: Icon(Icons.search_outlined)),
+          label: 'Search',
+        ),
+        NavigationDestination(
+          icon: Badge(
+            label: Text('2'),
+            child: Icon(Icons.pin_drop_rounded),
+          ),
+          label: 'Saved Locations',
+        ),
+      ],
+    );
+  }
+
+  AppBar appBar(BuildContext context) {
+    return AppBar(
+      leading: const Icon(
+        Icons.menu,
+      ),
+      centerTitle: true,
+      title: const Text("Fuel Wise"),
+      actions: [
+        NotificationBell(),
+      ],
+    );
+  }
+
+  void setState(Null Function() param0) {}
+}

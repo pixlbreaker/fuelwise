@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
+import 'package:fuelwise/pages/stations_page.dart';
 
 class StationCard extends StatelessWidget {
   final Results station;
@@ -17,7 +18,7 @@ class StationCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return Container();
+                return StationPage(station: station);
               },
             ),
           );

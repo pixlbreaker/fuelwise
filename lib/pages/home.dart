@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Variables used on the homepage
   final _gasBuddyService = GasBuddyService();
   final _controller = TextEditingController();
   int? count = 0;
