@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:fuelwise/pages/gas_station.dart';
+import 'package:fuelwise/service/map_service.dart';
 import 'package:fuelwise/widgets/nofitication_bell.dart';
 import 'package:fuelwise/service/location_service.dart';
 import 'package:geolocator/geolocator.dart';
@@ -83,11 +84,12 @@ class _StationPage extends State<StationPage> {
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Navigating to station details...")),
-                );
+                MapUtils.openMapAddress(widget.station.address.line1);
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   SnackBar(content: Text("Navigating to station details...")),
+                // );
               },
-              child: Text('More Details'),
+              child: Text('Open Google Maps'),
             ),
           ],
         ),
