@@ -222,10 +222,10 @@ class Credit {
   late final String? postedTime;
   late final double? price;
   late final String typename;
+  late final DateTime postedDate;
 
   Credit.fromJson(Map<String, dynamic> json) {
     nickname = null;
-    postedTime = null;
     var p = json["price"];
     if (p == 0) {
       price = 0.0;
@@ -233,6 +233,12 @@ class Credit {
       price = json['price'];
     }
     typename = json['__typename'];
+    postedTime = json['postedTime'];
+    if (postedTime != null) {
+      postedDate = DateTime.parse(postedTime.toString());
+    } else {
+      postedDate = DateTime.now();
+    }
   }
 
   Map<String, dynamic> toJson() {

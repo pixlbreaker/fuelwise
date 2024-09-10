@@ -43,6 +43,8 @@ dependencies:
   json_annotation: ^4.0.1
   json_theme: ^6.4.1
   json_theme_plus: ^6.6.1
+  flutter_map: ^7.0.2
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
