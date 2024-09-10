@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
-import 'package:fuelwise/pages/gas_station.dart';
 import 'package:fuelwise/service/map_service.dart';
 import 'package:fuelwise/widgets/nofitication_bell.dart';
 import 'package:fuelwise/service/location_service.dart';
