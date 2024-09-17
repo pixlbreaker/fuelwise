@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TopInformation extends StatelessWidget {
-  TopInformation(this.topPrice);
+  TopInformation(this.topPrice, this.topName);
 
+  final String topName;
   final double topPrice;
 
   @override
@@ -12,8 +13,8 @@ class TopInformation extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
-          "Current Price",
-          style: themeData.textTheme.headlineLarge,
+          topName,
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: 6.0,
@@ -23,11 +24,6 @@ class TopInformation extends StatelessWidget {
           children: [
             Text("\$" + topPrice.toString(),
                 style: themeData.textTheme.bodyLarge),
-            FilledButton(
-              onPressed: () {},
-              child: Text("Location"),
-              style: themeData.elevatedButtonTheme.style,
-            ),
           ],
         ),
         SizedBox(

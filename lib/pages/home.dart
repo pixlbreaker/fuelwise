@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   int? count = 0;
   String postalCode = "";
   double? topPrice = 0;
+  String topName = "";
   late List<Results> stations;
   int currentPageIndex = 0;
 
@@ -57,6 +58,7 @@ class _HomePageState extends State<HomePage> {
       // Gets the top Price
       topPrice = stations[0].prices[0].credit.price! / 100;
       topPrice = double.parse(topPrice!.toStringAsFixed(2));
+      topName = stations[0].name;
     });
   }
 
@@ -85,24 +87,24 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 25,
             ),
-            TopInformation(topPrice!),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: SearchInput(
-                    textController: _controller,
-                    hintText: "Search",
-                  ),
-                ),
-                FilledButton(
-                  onPressed: () {
-                    _getInitialInfo(_controller.text);
-                  },
-                  child: Text("Search"),
-                  style: Theme.of(context).elevatedButtonTheme.style,
-                ),
-              ],
-            ),
+            TopInformation(topPrice!, topName),
+            // Row(
+            //   children: <Widget>[
+            //     Expanded(
+            //       child: SearchInput(
+            //         textController: _controller,
+            //         hintText: "Search",
+            //       ),
+            //     ),
+            //     FilledButton(
+            //       onPressed: () {
+            //         _getInitialInfo(_controller.text);
+            //       },
+            //       child: Text("Search"),
+            //       style: Theme.of(context).elevatedButtonTheme.style,
+            //     ),
+            //   ],
+            // ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Divider(
@@ -113,6 +115,12 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 40),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _getInitialInfo("");
+        },
+        child: const Icon(Icons.location_on),
       ),
     );
   }
@@ -159,9 +167,10 @@ class _HomePageState extends State<HomePage> {
           },
           itemCount: count!.toInt(),
           scrollDirection: Axis.vertical,
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           padding:
-              const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 20),
+              const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 10),
         ),
       );
 
