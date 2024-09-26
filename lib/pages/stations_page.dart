@@ -48,7 +48,7 @@ class _StationPage extends State<StationPage> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
+    Theme.of(context);
     return Scaffold(
       appBar: appBar(context),
       backgroundColor: Theme.of(context).navigationBarTheme.backgroundColor,

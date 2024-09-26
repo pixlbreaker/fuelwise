@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuelwise/pages/search_page.dart';
 import 'package:fuelwise/service/gas_buddy_service.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:fuelwise/widgets/nofitication_bell.dart';
@@ -16,6 +17,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Pages
+  final List<Widget> pages = [
+    const HomePage(),
+    const SearchPage(),
+  ];
+  int currentPageIndex = 0;
+
   // Variables used on the homepage
   final _gasBuddyService = GasBuddyService();
   final _controller = TextEditingController();
@@ -24,7 +32,6 @@ class _HomePageState extends State<HomePage> {
   double? topPrice = 0;
   String topName = "";
   late List<Results> stations;
-  int currentPageIndex = 0;
 
   void _getInitialInfo(String search) async {
     if (!mounted) return;
