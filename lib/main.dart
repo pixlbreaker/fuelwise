@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuelwise/pages/home.dart';
+import 'package:fuelwise/pages/main_page.dart';
 import 'package:json_theme_plus/json_theme_plus.dart';
 
 import 'package:flutter/services.dart'; // For rootBundle
@@ -23,6 +23,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage(), theme: theme);
+    return MaterialApp(home: MainPage(), theme: theme);
   }
 }

@@ -18,7 +18,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Center(
-      child: Text('School Page', style: TextStyle(fontSize: 24)),
+      child: Text('Search Page', style: TextStyle(fontSize: 24)),
     );
   }
 }

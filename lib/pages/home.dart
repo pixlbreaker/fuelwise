@@ -84,9 +84,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context),
-      backgroundColor: Theme.of(context).navigationBarTheme.backgroundColor,
-      bottomNavigationBar: bottomNavigationBar(context),
       body: RefreshIndicator(
         onRefresh: _pullRefresh,
         child: ListView(
@@ -95,23 +92,6 @@ class _HomePageState extends State<HomePage> {
               height: 25,
             ),
             TopInformation(topPrice!, topName),
-            // Row(
-            //   children: <Widget>[
-            //     Expanded(
-            //       child: SearchInput(
-            //         textController: _controller,
-            //         hintText: "Search",
-            //       ),
-            //     ),
-            //     FilledButton(
-            //       onPressed: () {
-            //         _getInitialInfo(_controller.text);
-            //       },
-            //       child: Text("Search"),
-            //       style: Theme.of(context).elevatedButtonTheme.style,
-            //     ),
-            //   ],
-            // ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Divider(
@@ -129,36 +109,6 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.location_on),
       ),
-    );
-  }
-
-  NavigationBar bottomNavigationBar(BuildContext context) {
-    return NavigationBar(
-      onDestinationSelected: (int index) {
-        setState(() {
-          currentPageIndex = index;
-        });
-      },
-      indicatorColor: Theme.of(context).navigationBarTheme.indicatorColor,
-      selectedIndex: currentPageIndex,
-      destinations: const <Widget>[
-        NavigationDestination(
-          selectedIcon: Icon(Icons.home),
-          icon: Icon(Icons.home_outlined),
-          label: 'Home',
-        ),
-        NavigationDestination(
-          icon: Badge(child: Icon(Icons.search_outlined)),
-          label: 'Search',
-        ),
-        NavigationDestination(
-          icon: Badge(
-            label: Text('2'),
-            child: Icon(Icons.pin_drop_rounded),
-          ),
-          label: 'Saved Locations',
-        ),
-      ],
     );
   }
 
@@ -180,17 +130,4 @@ class _HomePageState extends State<HomePage> {
               const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 10),
         ),
       );
-
-  AppBar appBar(BuildContext context) {
-    return AppBar(
-      leading: const Icon(
-        Icons.menu,
-      ),
-      centerTitle: true,
-      title: const Text("Fuel Wise"),
-      actions: [
-        NotificationBell(),
-      ],
-    );
-  }
 }
