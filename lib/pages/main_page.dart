@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuelwise/pages/home.dart';
+import 'package:fuelwise/pages/saved_stations.dart';
 import 'package:fuelwise/pages/search_page.dart';
 import 'package:fuelwise/widgets/nofitication_bell.dart';
 
@@ -15,6 +16,7 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> pages = [
     const HomePage(),
     const SearchPage(),
+    const SavedStationsPage()
   ];
   int currentPageIndex = 0;
 
