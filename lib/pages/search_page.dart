@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:fuelwise/service/gas_buddy_service.dart';
 import 'package:fuelwise/widgets/search.dart';
+import 'package:fuelwise/widgets/station_card.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -74,10 +75,6 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       body: ListView(
         children: [
-          Text(
-            'Search Page',
-            style: TextStyle(fontSize: 24),
-          ),
           Row(
             children: <Widget>[
               Expanded(
@@ -95,8 +92,28 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ],
           ),
+          stationsView(),
         ],
       ),
     );
   }
+
+  Container stationsView() => Container(
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            return StationCard(stations[index]);
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(
+              height: 15.0,
+            );
+          },
+          itemCount: count!.toInt(),
+          scrollDirection: Axis.vertical,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          padding:
+              const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 10),
+        ),
+      );
 }

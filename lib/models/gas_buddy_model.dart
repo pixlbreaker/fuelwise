@@ -227,7 +227,7 @@ class Credit {
   Credit.fromJson(Map<String, dynamic> json) {
     nickname = null;
     var p = json["price"];
-    if (p == 0) {
+    if (p == 0 || p is int) {
       price = 0.0;
     } else {
       price = json['price'];
