@@ -68,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    _getInitialInfo("");
+    //_getInitialInfo("");
   }
 
   Widget build(BuildContext context) {

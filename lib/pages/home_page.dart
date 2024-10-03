@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   String postalCode = "";
   double? topPrice = 0;
   String topName = "";
+  String topAddress = "";
   late List<Results> stations;
 
   void _getInitialInfo(String search) async {
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage> {
       topPrice = stations[0].prices[0].credit.price! / 100;
       topPrice = double.parse(topPrice!.toStringAsFixed(2));
       topName = stations[0].name;
+      topAddress = stations[0].address.line1;
     });
   }
 
@@ -80,7 +82,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 25,
             ),
-            TopInformation(topPrice!, topName),
+            TopInformation(topPrice!, topName, topAddress),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Divider(

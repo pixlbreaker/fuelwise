@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TopInformation extends StatelessWidget {
-  TopInformation(this.topPrice, this.topName);
+  TopInformation(this.topPrice, this.topName, this.topAddress);
 
   final String topName;
   final double topPrice;
+  final String topAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,10 @@ class TopInformation extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Text(
+              topAddress,
+              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+            ),
             Text("\$" + topPrice.toString(),
                 style: themeData.textTheme.bodyLarge),
           ],
