@@ -26,6 +26,34 @@ class _MainPageState extends State<MainPage> {
       appBar: appBar(context),
       backgroundColor: Theme.of(context).navigationBarTheme.backgroundColor,
       bottomNavigationBar: bottomNavigationBar(context),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+      ),
       body: IndexedStack(
         index: currentPageIndex,
         children: pages,
@@ -65,8 +93,11 @@ class _MainPageState extends State<MainPage> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      leading: const Icon(
-        Icons.menu,
+      leading: IconButton(
+        icon: const Icon(Icons.menu),
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
       ),
       centerTitle: true,
       title: const Text("Fuel Wise"),
