@@ -24,13 +24,13 @@ class _StationPage extends State<StationPage> {
 
   // Gets the location
   double lat = 51.1;
-  double lng = -2.0;
+  double lng = 2.0;
   final _LocationService = LocationService();
 
   _fetchLocation() async {
-    Position position = await _LocationService.getLatLong();
-    lat = position.latitude;
-    lng = position.longitude;
+    //Position position = await _LocationService.getLatLong();
+    // lat = position.latitude;
+    // lng = position.longitude;
   }
 
   // ignore: unused_element
@@ -80,6 +80,31 @@ class _StationPage extends State<StationPage> {
             ),
             SizedBox(height: 8),
             pricesList(),
+            SizedBox(height: 8),
+            Container(
+              height: 200,
+              child: FlutterMap(
+                options: MapOptions(
+                  initialCenter: LatLng(lat, lng),
+                  initialZoom: 15.1,
+                ),
+                children: [
+                  TileLayer(
+                    urlTemplate:
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'com.example.app',
+                  ),
+                  RichAttributionWidget(
+                    attributions: [
+                      TextSourceAttribution('OpenStreetMap contributors',
+                          onTap: () =>
+                              {} //launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+                          ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
@@ -93,27 +118,6 @@ class _StationPage extends State<StationPage> {
           ],
         ),
       ),
-
-      // FlutterMap(
-      //   options: MapOptions(
-      //     initialCenter: LatLng(lat, lng),
-      //     initialZoom: 15.1,
-      //   ),
-      //   children: [
-      //     TileLayer(
-      //       urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-      //       userAgentPackageName: 'com.example.app',
-      //     ),
-      //     RichAttributionWidget(
-      //       attributions: [
-      //         TextSourceAttribution('OpenStreetMap contributors',
-      //             onTap: () =>
-      //                 {} //launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-      //             ),
-      //       ],
-      //     ),
-      //   ],
-      // ),
     );
   }
 

@@ -90,7 +90,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             stationsView(),
-            const SizedBox(height: 40),
           ],
         ),
       ),
