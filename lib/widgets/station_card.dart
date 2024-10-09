@@ -4,7 +4,9 @@ import 'package:fuelwise/pages/stations_page.dart';
 
 class StationCard extends StatelessWidget {
   final Results station;
-  StationCard(this.station);
+  final double lat;
+  final double lng;
+  StationCard(this.station, this.lat, this.lng);
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
@@ -20,7 +22,7 @@ class StationCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return StationPage(station: station);
+                  return StationPage(station: station, lat: lat, lng: lng);
                 },
               ),
             );

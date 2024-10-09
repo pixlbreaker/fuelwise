@@ -22,6 +22,8 @@ class _HomePageState extends State<HomePage> {
   String topName = "";
   String topAddress = "";
   late List<Results> stations;
+  double lat = 0.0;
+  double lng = 0.0;
 
   void _getInitialInfo(String search) async {
     if (!mounted) return;
@@ -32,10 +34,13 @@ class _HomePageState extends State<HomePage> {
       LocationPermission permission;
       permission = await Geolocator.requestPermission();
 
+      // Sets the position
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
       List<Placemark> placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
+      lat = position.latitude;
+      lng = position.longitude;
 
       // Sets the postalcode
       postalCode = placemarks[0].postalCode.toString();
@@ -105,7 +110,7 @@ class _HomePageState extends State<HomePage> {
   Container stationsView() => Container(
         child: ListView.separated(
           itemBuilder: (context, index) {
-            return StationCard(stations[index]);
+            return StationCard(stations[index], lat, lng);
           },
           separatorBuilder: (BuildContext context, int index) {
             return const SizedBox(

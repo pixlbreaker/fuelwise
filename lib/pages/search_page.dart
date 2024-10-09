@@ -22,6 +22,8 @@ class _SearchPageState extends State<SearchPage> {
   double? topPrice = 0;
   String topName = "";
   late List<Results> stations;
+  double lat = 0.0;
+  double lng = 0.0;
 
   void _getInitialInfo(String search) async {
     if (!mounted) return;
@@ -36,6 +38,8 @@ class _SearchPageState extends State<SearchPage> {
           desiredAccuracy: LocationAccuracy.high);
       List<Placemark> placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
+      lat = position.latitude;
+      lng = position.longitude;
 
       // Sets the postalcode
       postalCode = placemarks[0].postalCode.toString();
@@ -101,7 +105,7 @@ class _SearchPageState extends State<SearchPage> {
   Container stationsView() => Container(
         child: ListView.separated(
           itemBuilder: (context, index) {
-            return StationCard(stations[index]);
+            return StationCard(stations[index], lat, lng);
           },
           separatorBuilder: (BuildContext context, int index) {
             return const SizedBox(

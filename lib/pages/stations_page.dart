@@ -9,9 +9,12 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 class StationPage extends StatefulWidget {
-  const StationPage({super.key, required this.station});
+  const StationPage(
+      {super.key, required this.station, required this.lat, required this.lng});
 
   final Results station;
+  final double lat;
+  final double lng;
 
   @override
   State<StationPage> createState() => _StationPage();
@@ -20,15 +23,10 @@ class StationPage extends StatefulWidget {
 class _StationPage extends State<StationPage> {
   int currentPageIndex = 0;
 
-  // Gets the location
-  double lat = 51.1;
-  double lng = 3.0;
   final _LocationService = LocationService();
 
   _fetchLocation() async {
     Position position = await _LocationService.getLatLong();
-    lat = position.latitude;
-    lng = position.longitude;
   }
 
   @override
@@ -71,32 +69,9 @@ class _StationPage extends State<StationPage> {
             SizedBox(height: 8),
             pricesList(),
             SizedBox(height: 8),
-            Container(
-              height: 250,
-              child: FlutterMap(
-                options: MapOptions(
-                  initialCenter: LatLng(lat, lng),
-                  initialZoom: 9.1,
-                ),
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.example.app',
-                  ),
-                  RichAttributionWidget(
-                    attributions: [
-                      TextSourceAttribution('OpenStreetMap contributors',
-                          onTap: () =>
-                              {} //launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-                          ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            flutterMap(),
             SizedBox(height: 24),
-            ElevatedButton(
+            FilledButton(
               onPressed: () {
                 MapUtils.openMapAddress(widget.station.address.line1);
                 // ScaffoldMessenger.of(context).showSnackBar(
@@ -107,6 +82,32 @@ class _StationPage extends State<StationPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Container flutterMap() {
+    return Container(
+      height: 250,
+      child: FlutterMap(
+        options: MapOptions(
+          initialCenter: LatLng(widget.lat, widget.lng),
+          initialZoom: 12.1,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.app',
+          ),
+          RichAttributionWidget(
+            attributions: [
+              TextSourceAttribution('OpenStreetMap contributors',
+                  onTap: () =>
+                      {} //launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+                  ),
+            ],
+          ),
+        ],
       ),
     );
   }
