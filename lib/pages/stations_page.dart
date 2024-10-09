@@ -19,31 +19,22 @@ class StationPage extends StatefulWidget {
 
 class _StationPage extends State<StationPage> {
   int currentPageIndex = 0;
-  // ignore: unused_field
-  int _counter = 0;
 
   // Gets the location
   double lat = 51.1;
-  double lng = 2.0;
+  double lng = 3.0;
   final _LocationService = LocationService();
 
   _fetchLocation() async {
-    //Position position = await _LocationService.getLatLong();
-    // lat = position.latitude;
-    // lng = position.longitude;
+    Position position = await _LocationService.getLatLong();
+    lat = position.latitude;
+    lng = position.longitude;
   }
 
-  // ignore: unused_element
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-      _fetchLocation();
-    });
+  @override
+  void initState() {
+    super.initState();
+    _fetchLocation();
   }
 
   @override
@@ -52,7 +43,6 @@ class _StationPage extends State<StationPage> {
     return Scaffold(
       appBar: appBar(context),
       backgroundColor: Theme.of(context).navigationBarTheme.backgroundColor,
-      bottomNavigationBar: bottomNavigationBar(context),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -82,11 +72,11 @@ class _StationPage extends State<StationPage> {
             pricesList(),
             SizedBox(height: 8),
             Container(
-              height: 200,
+              height: 250,
               child: FlutterMap(
                 options: MapOptions(
                   initialCenter: LatLng(lat, lng),
-                  initialZoom: 15.1,
+                  initialZoom: 9.1,
                 ),
                 children: [
                   TileLayer(
@@ -145,36 +135,6 @@ class _StationPage extends State<StationPage> {
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 20),
-    );
-  }
-
-  NavigationBar bottomNavigationBar(BuildContext context) {
-    return NavigationBar(
-      onDestinationSelected: (int index) {
-        setState(() {
-          currentPageIndex = index;
-        });
-      },
-      indicatorColor: Theme.of(context).navigationBarTheme.indicatorColor,
-      selectedIndex: currentPageIndex,
-      destinations: const <Widget>[
-        NavigationDestination(
-          selectedIcon: Icon(Icons.home),
-          icon: Icon(Icons.home_outlined),
-          label: 'Home',
-        ),
-        NavigationDestination(
-          icon: Badge(child: Icon(Icons.search_outlined)),
-          label: 'Search',
-        ),
-        NavigationDestination(
-          icon: Badge(
-            label: Text('2'),
-            child: Icon(Icons.pin_drop_rounded),
-          ),
-          label: 'Saved Locations',
-        ),
-      ],
     );
   }
 
