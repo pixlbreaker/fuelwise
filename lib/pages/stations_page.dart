@@ -92,13 +92,21 @@ class _StationPage extends State<StationPage> {
       child: FlutterMap(
         options: MapOptions(
           initialCenter: LatLng(widget.lat, widget.lng),
-          initialZoom: 12.1,
+          initialZoom: 13.5,
         ),
         children: [
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.app',
           ),
+          MarkerLayer(markers: [
+            Marker(
+                point: LatLng(widget.lat, widget.lng),
+                child: Icon(
+                  Icons.location_pin,
+                  color: Colors.red,
+                ))
+          ]),
           RichAttributionWidget(
             attributions: [
               TextSourceAttribution('OpenStreetMap contributors',

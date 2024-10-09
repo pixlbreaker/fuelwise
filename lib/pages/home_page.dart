@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
       // Sets the position
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
+
       List<Placemark> placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
       lat = position.latitude;
