@@ -3,10 +3,14 @@ import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:fuelwise/pages/stations_page.dart';
 
 class StationCard extends StatelessWidget {
+  
+  // Station and lat, long information
   final Results station;
   final double lat;
   final double lng;
   StationCard(this.station, this.lat, this.lng);
+
+
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);

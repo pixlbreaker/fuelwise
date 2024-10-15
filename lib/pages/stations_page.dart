@@ -4,6 +4,7 @@ import 'package:fuelwise/service/map_service.dart';
 import 'package:fuelwise/widgets/nofitication_bell.dart';
 import 'package:fuelwise/service/location_service.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -24,6 +25,7 @@ class _StationPage extends State<StationPage> {
   int currentPageIndex = 0;
 
   final _LocationService = LocationService();
+  
 
   _fetchLocation() async {
     Position position = await _LocationService.getLatLong();
@@ -48,35 +50,30 @@ class _StationPage extends State<StationPage> {
           children: [
             Text(
               widget.station.name,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               widget.station.address.line1,
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
             Text(
-              widget.station.address.locality +
-                  " " +
-                  widget.station.address.postalCode,
+              "${widget.station.address.locality} ${widget.station.address.postalCode}",
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               "Fuel Prices",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             pricesList(),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             flutterMap(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             FilledButton(
               onPressed: () {
                 MapUtils.openMapAddress(widget.station.address.line1);
-                // ScaffoldMessenger.of(context).showSnackBar(
-                //   SnackBar(content: Text("Navigating to station details...")),
-                // );
               },
               child: Text('Open Google Maps'),
             ),
@@ -86,8 +83,8 @@ class _StationPage extends State<StationPage> {
     );
   }
 
-  Container flutterMap() {
-    return Container(
+  SizedBox flutterMap() {
+    return SizedBox(
       height: 250,
       child: FlutterMap(
         options: MapOptions(
@@ -102,19 +99,19 @@ class _StationPage extends State<StationPage> {
           MarkerLayer(markers: [
             Marker(
                 point: LatLng(widget.lat, widget.lng),
-                child: Icon(
+                child: const Icon(
                   Icons.location_pin,
                   color: Colors.red,
                 ))
           ]),
-          RichAttributionWidget(
-            attributions: [
-              TextSourceAttribution('OpenStreetMap contributors',
-                  onTap: () =>
-                      {} //launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-                  ),
-            ],
-          ),
+          // RichAttributionWidget(
+          //   attributions: [
+          //     TextSourceAttribution('OpenStreetMap contributors',
+          //         onTap: () =>
+          //             {} //launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+          //         ),
+          //   ],
+          // ),
         ],
       ),
     );
