@@ -38,4 +38,19 @@ class LocationService {
 
     return position;
   }
+
+  Future<(double, double)> getLatLongFromAddress(String address) async{
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    List<Location> locations = await locationFromAddress(address);
+
+    double lat = locations[0].latitude;
+    double long = locations.first.longitude;
+
+    return (lat, long);
+  }
 }

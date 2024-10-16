@@ -25,18 +25,21 @@ class StationPage extends StatefulWidget {
 
 class _StationPage extends State<StationPage> {
   int currentPageIndex = 0;
-
+  double latitude = 0.0;
+  double longitude = 0.0;
   final _LocationService = LocationService();
-  
 
-  _fetchLocation() async {
+  _fetchLocation(Results station) async {
     Position position = await _LocationService.getLatLong();
+    var loc = await _LocationService.getLatLongFromAddress(station.address.line1);
+    latitude = loc.$1;
+    longitude = loc.$2;
   }
 
   @override
   void initState() {
+    _fetchLocation(widget.station);
     super.initState();
-    _fetchLocation();
   }
 
   @override
@@ -77,7 +80,7 @@ class _StationPage extends State<StationPage> {
               onPressed: () {
                 MapUtils.openMapAddress(widget.station.address.line1);
               },
-              child: Text('Open Google Maps'),
+              child: const Text('Open Google Maps'),
             ),
           ],
         ),
@@ -104,16 +107,14 @@ class _StationPage extends State<StationPage> {
                 child: const Icon(
                   Icons.location_pin,
                   color: Colors.red,
-                ))
+                ),),
+            Marker(
+                point: LatLng(latitude, longitude),
+                child: const Icon(
+                  Icons.location_pin,
+                  color: Colors.blue,
+                )),
           ]),
-          // RichAttributionWidget(
-          //   attributions: [
-          //     TextSourceAttribution('OpenStreetMap contributors',
-          //         onTap: () =>
-          //             {} //launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
-          //         ),
-          //   ],
-          // ),
         ],
       ),
     );
@@ -130,11 +131,11 @@ class _StationPage extends State<StationPage> {
               Text(
                 DateFormat.yMMMMd()
                     .format(widget.station.prices[index].credit.postedDate),
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
               Text(
                 '\$${widget.station.prices[index].credit.price.toString()}',
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ],
           ),
