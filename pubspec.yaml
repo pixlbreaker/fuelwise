@@ -46,6 +46,7 @@ dependencies:
   flutter_map: ^7.0.2
   intl: ^0.19.0
   url_launcher: ^6.3.0
+  syncfusion_flutter_maps: ^27.1.57
 
 dev_dependencies:
   flutter_test:

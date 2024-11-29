@@ -77,27 +77,30 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: SearchInput(
-                  textController: _controller,
-                  hintText: "Search",
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: ListView(
+          children: [
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: SearchInput(
+                    textController: _controller,
+                    hintText: "Search",
+                  ),
                 ),
-              ),
-              FilledButton(
-                onPressed: () {
-                  _getInitialInfo(_controller.text);
-                },
-                child: Text("Search"),
-                style: Theme.of(context).elevatedButtonTheme.style,
-              ),
-            ],
-          ),
-          stationsView(),
-        ],
+                FilledButton(
+                  onPressed: () {
+                    _getInitialInfo(_controller.text);
+                  },
+                  child: Text("Search"),
+                  style: Theme.of(context).elevatedButtonTheme.style,
+                ),
+              ],
+            ),
+            stationsView(),
+          ],
+        ),
       ),
     );
   }
