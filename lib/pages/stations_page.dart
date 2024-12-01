@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:fuelwise/service/map_service.dart';
 import 'package:fuelwise/widgets/nofitication_bell.dart';
+import 'package:fuelwise/widgets/flutter_map.dart';
 import 'package:fuelwise/service/location_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -31,7 +32,8 @@ class _StationPage extends State<StationPage> {
 
   _fetchLocation(Results station) async {
     Position position = await _LocationService.getLatLong();
-    var loc = await _LocationService.getLatLongFromAddress(station.address.line1);
+    var loc =
+        await _LocationService.getLatLongFromAddress(station.address.line1);
     latitude = loc.$1;
     longitude = loc.$2;
   }
@@ -74,7 +76,7 @@ class _StationPage extends State<StationPage> {
             const SizedBox(height: 8),
             pricesList(),
             const SizedBox(height: 8),
-            flutterMap(),
+            FlutterMap(widget: widget, a: latitude, b: longitude),
             const SizedBox(height: 24),
             FilledButton(
               onPressed: () {
@@ -84,38 +86,6 @@ class _StationPage extends State<StationPage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  SizedBox flutterMap() {
-    return SizedBox(
-      height: 250,
-      child: FlutterMap(
-        options: MapOptions(
-          initialCenter: LatLng(widget.lat, widget.lng),
-          initialZoom: 13.5,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.app',
-          ),
-          MarkerLayer(markers: [
-            Marker(
-                point: LatLng(widget.lat, widget.lng),
-                child: const Icon(
-                  Icons.location_pin,
-                  color: Colors.red,
-                ),),
-            Marker(
-                point: LatLng(latitude, longitude),
-                child: const Icon(
-                  Icons.location_pin,
-                  color: Colors.blue,
-                )),
-          ]),
-        ],
       ),
     );
   }
