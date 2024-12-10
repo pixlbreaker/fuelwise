@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';
 import 'package:fuelwise/service/map_service.dart';
 import 'package:fuelwise/widgets/nofitication_bell.dart';
-import 'package:fuelwise/widgets/flutter_map.dart';
+import 'package:fuelwise/widgets/station_map.dart';
 import 'package:fuelwise/service/location_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter_map/flutter_map.dart';
 
 class StationPage extends StatefulWidget {
   const StationPage(
@@ -76,7 +75,8 @@ class _StationPage extends State<StationPage> {
             const SizedBox(height: 8),
             pricesList(),
             const SizedBox(height: 8),
-            FlutterMap(widget: widget, a: latitude, b: longitude),
+            StationMap(widget, latitude, longitude),
+            // StationMap(widget, latitude, longitude),
             const SizedBox(height: 24),
             FilledButton(
               onPressed: () {

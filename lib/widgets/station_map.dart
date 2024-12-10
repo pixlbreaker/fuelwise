@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:fuelwise/pages/stations_page.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:latlong2/latlong.dart';
 
-class FlutterMap extends StatelessWidget {
-  const FlutterMap({
-    super.key,
-    required this.widget,
-    required this.a,
-    required this.b,
-  });
+class StationMap extends StatelessWidget {
+  const StationMap(this.station, this.a, this.b, {super.key});
 
-  final StationPage widget;
+  final StationPage station;
   final double a;
   final double b;
 
@@ -21,7 +18,7 @@ class FlutterMap extends StatelessWidget {
       height: 250,
       child: FlutterMap(
         options: MapOptions(
-          initialCenter: LatLng(widget.lat, widget.lng),
+          initialCenter: LatLng(station.lat, station.lng),
           initialZoom: 13.5,
         ),
         children: [
@@ -31,7 +28,7 @@ class FlutterMap extends StatelessWidget {
           ),
           MarkerLayer(markers: [
             Marker(
-              point: LatLng(widget.lat, widget.lng),
+              point: LatLng(station.lat, station.lng),
               child: const Icon(
                 Icons.location_pin,
                 color: Colors.red,
