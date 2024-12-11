@@ -29,18 +29,28 @@ class _StationPage extends State<StationPage> {
   double longitude = 0.0;
   final _LocationService = LocationService();
 
-  _fetchLocation(Results station) async {
+  Future<(double, double)> _fetchLocation(Results station) async {
     Position position = await _LocationService.getLatLong();
     var loc =
         await _LocationService.getLatLongFromAddress(station.address.line1);
     latitude = loc.$1;
     longitude = loc.$2;
+
+    return (latitude, longitude);
   }
 
   @override
   void initState() {
-    _fetchLocation(widget.station);
     super.initState();
+    _initializeLocation();
+  }
+
+  Future<void> _initializeLocation() async {
+    final (lat, long) = await _fetchLocation(widget.station);
+    setState(() {
+      latitude = lat;
+      longitude = long;
+    });
   }
 
   @override
