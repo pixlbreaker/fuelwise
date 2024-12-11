@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, unused_import
+// ignore_for_file: unused_local_variable, unused_import, depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
 import 'package:fuelwise/models/gas_buddy_model.dart';

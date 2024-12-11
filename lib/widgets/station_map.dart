@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:fuelwise/pages/stations_page.dart';
