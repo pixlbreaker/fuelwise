@@ -16,12 +16,12 @@ class StationMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 250,
       child: FlutterMap(
         options: MapOptions(
           initialCenter: LatLng(station.lat, station.lng),
-          initialZoom: 13.5,
+          initialZoom: 12.5,
         ),
         children: [
           TileLayer(

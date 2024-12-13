@@ -72,13 +72,13 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    //_getInitialInfo("");
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ListView(
           children: [
             Row(
@@ -93,7 +93,7 @@ class _SearchPageState extends State<SearchPage> {
                   onPressed: () {
                     _getInitialInfo(_controller.text);
                   },
-                  child: Text("Search"),
+                  child: const Text("Search"),
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               ],

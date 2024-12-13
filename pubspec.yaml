@@ -47,6 +47,7 @@ dependencies:
   intl: ^0.19.0
   url_launcher: ^6.3.0
   syncfusion_flutter_maps: ^27.1.57
+  flutter_launcher_icons: 0.9.3
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,11 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -77,6 +83,7 @@ flutter:
     - assets/
     - assets/appainter_theme.json
     - assets/images/
+    - assets/icon/icon.png
     # - assets/icons/Arrow - Left 2.svg
     # - assets/icons/dots.svg
     # - assets/icons/Search.svg
@@ -112,3 +119,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+# android min sdk min:16, default 21
