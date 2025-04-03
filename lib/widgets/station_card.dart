@@ -8,7 +8,7 @@ class StationCard extends StatelessWidget {
   final Results station;
   final double lat;
   final double lng;
-  StationCard(this.station, this.lat, this.lng);
+  const StationCard(this.station, this.lat, this.lng, {super.key});
 
 
   @override
@@ -31,7 +31,7 @@ class StationCard extends StatelessWidget {
               ),
             );
           },
-          child: Text('More Details'),
+          child: const Text('More Details'),
         ),
       ),
     );

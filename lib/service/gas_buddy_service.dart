@@ -29,7 +29,7 @@ class GasBuddyService {
     if (response.statusCode == 200) {
       return GasBuddyModel.fromJson(json.decode(response.body));
     } else {
-      throw new Exception('Failed to load post');
+      throw Exception('Failed to load post');
     }
   }
 }

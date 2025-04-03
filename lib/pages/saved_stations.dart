@@ -8,8 +8,9 @@ class SavedStationsPage extends StatefulWidget {
 }
 
 class _SavedStationsPageState extends State<SavedStationsPage> {
+  @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Comming Soon...', style: TextStyle(fontSize: 24)),
     );
   }

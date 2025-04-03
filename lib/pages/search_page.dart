@@ -93,8 +93,8 @@ class _SearchPageState extends State<SearchPage> {
                   onPressed: () {
                     _getInitialInfo(_controller.text);
                   },
-                  child: const Text("Search"),
                   style: Theme.of(context).elevatedButtonTheme.style,
+                  child: const Text("Search"),
                 ),
               ],
             ),

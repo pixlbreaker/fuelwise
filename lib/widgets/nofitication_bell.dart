@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class NotificationBell extends StatelessWidget {
+  const NotificationBell({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 16.0),
+      padding: const EdgeInsets.only(right: 16.0),
       child: GestureDetector(
         onTap: () {},
         child: Stack(
           alignment: Alignment.topRight,
           children: [
-            Icon(
+            const Icon(
               Icons.notification_important,
             ),
             Container(
